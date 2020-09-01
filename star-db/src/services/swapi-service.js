@@ -42,4 +42,43 @@ export default class SwapiService {
     return this._transformStarship(starship);
   }
 
+  _extractId(item) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return item.url.match(idRegExp)[1];
+  };
+
+
+  _transformPlanet(planet) {
+    return {
+        id: this._extractId(planet),
+        name: planet.name,
+        population: planet.population,
+        rotationPeriod: planet.rotation_period,
+        dianeter: planet.diameter
+    };
+  }
+
+  _transformStarship(starship) {
+    return {
+      id: this._extractId(starship),
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.costInCredits,
+      lenght: starship.lenght,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargoCapacity
+    };
+  };
+
+  _transformPerson(person) {
+    return {
+      id: this._extractId(person),
+      name: person.name,
+      gender: person.gender,
+      birtYear: person.birtYear,
+      eyeColor: person.eyeColor
+    };
+  };
 };
